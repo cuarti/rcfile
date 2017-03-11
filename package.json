@@ -1,0 +1,38 @@
+{
+  "name": "@zenox/rcfile",
+  "version": "1.0.0",
+  "description": "Read variables from rc files",
+  "keywords": [
+    "zenox",
+    "config",
+    "file"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "typings": "src/index",
+  "scripts": {},
+  "author": {
+    "name": "Albert Cuartiella",
+    "email": "cuarti1992@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuarti/rcfile.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cuarti/rcfile/issues"
+  },
+  "homepage": "https://github.com/cuarti/rcfile#readme",
+  "dependencies": {
+    "@types/es6-shim": "^0.31.32",
+    "@types/node": "^7.0.8"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.1.5",
+    "typescript": "^2.2.1"
+  },
+  "optionalDependencies": {
+    "es6-shim": "^0.35.3"
+  }
+}
