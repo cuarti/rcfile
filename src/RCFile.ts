@@ -10,8 +10,8 @@ import {EOL} from 'os';
  */
 export class RCFile {
 
-    private path: string;
-    private encoding?: string;
+    public path: string;
+    public encoding?: string;
 
     /**
      * Constructor method
@@ -94,6 +94,7 @@ export class RCFile {
                 parent = join(parent, '..');
             }
 
+            //TODO: Always exist or is '/'. Test with other conditions
             if(existsSync(p)) {
                 return resolve(p);
             }

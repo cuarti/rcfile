@@ -1,0 +1,12 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "class-name": true
+  },
+  "jsRules": {
+
+  },
+  "rulesDirectory": {
+
+  }
+}
