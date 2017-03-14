@@ -1,8 +1,16 @@
 
-import {dirname, join} from 'path';
-// import {exists, readFile} from 'fs';
-import {exists, readFile, existsSync} from 'fs';
+import {parse, dirname, join} from 'path';
+import {exists, readFile} from 'fs';
 import {EOL} from 'os';
+
+
+/**
+ * Root path
+ *
+ * @type    {string}
+ * @TODO    To abstract in @zenox/fs
+ */
+const ROOT = parse(__dirname).root;
 
 
 /**
@@ -44,64 +52,68 @@ export class RCFile {
     public load<T extends Object>(): Promise<T> {
 
         return new Promise((resolve, reject) => {
+
             readFile(this.path, this.encoding, (err, text) => {
 
                 if(err) {
                     return reject(err);
                 }
-
                 resolve(RCFile.parse(text));
             });
         });
+
     }
 
     /**
+     * Get existent file
      *
-     * @param   {string}    path
+     * @param   {string}    filename
      * @param   {string}    [encoding]
      * @return  {Promise<RCFile>}
      */
-    public static resolve(path: string, encoding?: string): Promise<RCFile> {
+    public static resolve(filename: string, encoding?: string): Promise<RCFile> {
 
         return new Promise((resolve, reject) => {
 
-            this.resolvePath(path).then(path => {
+            this.resolvePath(filename).then(path => {
                 resolve(new RCFile(path, encoding));
 
             }).catch(reject);
         });
+
     }
 
     /**
      * Resolve absolute path of rcfile
      *
-     * @param   {string}    path
+     * @param   {string}    filename
      * @return  {Promise<string>}
-     * @todo    If path is absolutePath, it have to check only filename
      */
-    public static resolvePath(path: string): Promise<string> {
+    public static resolvePath(filename: string): Promise<string> {
 
         return new Promise((resolve, reject) => {
 
-            let p;
-            let parent = dirname(process.argv[1]);
+            if(filename.startsWith(ROOT)) {
 
-            if(existsSync(p = join(process.cwd(), path))) {
-                return resolve(p);
+                return exists(filename, exists => {
+                    if(exists) {
+                        return resolve(filename);
+                    }
+                    return reject(new Error(`Path not exists: "${filename}"`));
+                });
             }
 
-            while(!existsSync(p = join(parent, path)) && parent !== '/') {
-                parent = join(parent, '..');
+            let paths = [join(process.cwd(), filename)];
+
+            for(let parent = dirname(process.mainModule.filename); parent !== ROOT; parent = join(parent, '..')) {
+                paths.push(join(parent, filename));
             }
 
-            //TODO: Always exist or is '/'. Test with other conditions
-            if(existsSync(p)) {
-                return resolve(p);
-            }
+            paths.push(join(ROOT, filename));
 
-            //TODO: Throw an error
-            // reject();
+            return resolve(this.resolvePaths(paths, filename));
         });
+
     }
 
     /**
@@ -110,8 +122,9 @@ export class RCFile {
      * @param   {string}    text
      * @return  {T}
      * @private
-     * @todo    Use RegExp to control lines format
-     * @todo    If there are some incorrect line, throw an error
+     * @TODO    Use RegExp to control lines format
+     * @TODO    If there are some incorrect line, throws an error
+     * @TODO    Set it public and in other file to parse from string?
      */
     private static parse<T extends Object>(text: string): T {
 
@@ -129,13 +142,40 @@ export class RCFile {
             let tokens = line.split('=').map(l => l.trim());
 
             if(tokens.length !== 2) {
-                //TODO: Throw an error
+                //Here throws an error
             }
 
             o[tokens[0]] = tokens[1];
         }
 
         return o as T;
+    }
+
+    /**
+     * Get first existing path of path list
+     *
+     * @param   {string[]}  paths
+     * @param   {string}    filename
+     * @param   {number}    [index = 0]
+     * @return  {Promise<string>}
+     * @TODO    To abstract in @zenox/fs
+     */
+    private static resolvePaths(paths: string[], filename: string, index: number = 0): Promise<string> {
+
+        return new Promise((resolve, reject) => {
+
+            if(index >= paths.length) {
+                return reject(new Error(`No path exists for filename: "${filename}"`));
+            }
+
+            let path = paths[index];
+
+            exists(path, exists => {
+                return resolve(exists ? path : this.resolvePaths(paths, filename, ++index));
+            });
+
+        });
+
     }
 
 }
