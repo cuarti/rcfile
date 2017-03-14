@@ -6,8 +6,8 @@ import {RCFile} from '..';
 
 describe('RCFile', () => {
 
-    const EXISTENT_FILE_PATH = join(__dirname, '.rc');
-    const NONEXISTENT_FILE_PATH = join(__dirname, '.example');
+    const EXISTENT_FILE_PATH = join(__dirname, '.examplerc');
+    const NONEXISTENT_FILE_PATH = join(__dirname, 'file');
 
     let existent = new RCFile(EXISTENT_FILE_PATH);
     let nonexistent = new RCFile(NONEXISTENT_FILE_PATH);
@@ -40,7 +40,6 @@ describe('RCFile', () => {
         });
 
         it('nonExistentFile file', done => {
-
             nonexistent.load().then(() => {
                 ok(false);
                 done();
@@ -48,7 +47,6 @@ describe('RCFile', () => {
                 deepEqual(err, {errno: -2, code: 'ENOENT', syscall: 'open', path: NONEXISTENT_FILE_PATH});
                 done(!err);
             });
-
         });
 
     });
@@ -56,21 +54,17 @@ describe('RCFile', () => {
     describe('.resolve()', () => {
 
         it('absolute path', done => {
-
             RCFile.resolve(EXISTENT_FILE_PATH).then(file => {
                 equal(file.path, EXISTENT_FILE_PATH);
                 done();
             }).catch(done);
-
         });
 
         it('project root path', done => {
-
-            RCFile.resolve('test/.rc').then(file => {
+            RCFile.resolve('test/.examplerc').then(file => {
                 equal(file.path, EXISTENT_FILE_PATH);
                 done();
             }).catch(done);
-
         });
 
     });
@@ -78,35 +72,25 @@ describe('RCFile', () => {
     describe('.resolvePath()', () => {
 
         it('absolute path', done => {
-
             RCFile.resolvePath(EXISTENT_FILE_PATH).then(path => {
                 equal(path, EXISTENT_FILE_PATH);
                 done();
             }).catch(done);
-
         });
 
         it('project root path', done => {
-
-            RCFile.resolvePath('test/.rc').then(path => {
+            RCFile.resolvePath('test/.examplerc').then(path => {
                 equal(path, EXISTENT_FILE_PATH);
                 done();
             }).catch(done);
-
         });
 
-        // TODO: process.cwd() is equals to mocha executable directory. Get some method to test it, with canonical path (..)?
-        // it('parent path', done => {
-        //
-        //     RCFile.resolvePath('test/a/b/.rc').then(path => {
-        //         equal(path, EXISTENT_FILE_PATH);
-        //         done();
-        //     }).catch(err => {
-        //         console.error(err);
-        //         done(err);
-        //     });
-        //
-        // });
+        it('current working path', done => {
+            RCFile.resolvePath('../../test/.examplerc').then(data => {
+                equal(data, EXISTENT_FILE_PATH);
+                done();
+            }).catch(done);
+        });
 
     });
 
