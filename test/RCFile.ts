@@ -1,7 +1,7 @@
 
 import {ok, equal, deepEqual} from 'assert';
 import {join} from 'path';
-import {RCFile} from '..';
+import RCFile from '..';
 
 
 describe('RCFile', () => {
@@ -11,6 +11,10 @@ describe('RCFile', () => {
 
     let existent = new RCFile(EXISTENT_FILE_PATH);
     let nonexistent = new RCFile(NONEXISTENT_FILE_PATH);
+
+    it('constructor', () => {
+        ok(RCFile instanceof Function);
+    });
 
     describe('#exists()', () => {
 

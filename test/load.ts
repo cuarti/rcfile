@@ -12,6 +12,10 @@ describe('load', () => {
         WORKS: 'true'
     };
 
+    it('is function', () => {
+        ok(load instanceof Function);
+    });
+
     it('absolute path', done => {
         load(join(__dirname, '.examplerc')).then(data => {
             deepEqual(data, EXPECTED_DATA);
