@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cuarti/rcfile.git"
+    "url": "git+https://github.com/cuarti/zenox-rcfile.git"
   },
   "bugs": {
-    "url": "https://github.com/cuarti/rcfile/issues"
+    "url": "https://github.com/cuarti/zenox-rcfile/issues"
   },
-  "homepage": "https://github.com/cuarti/rcfile#readme",
+  "homepage": "https://github.com/cuarti/zenox-rcfile#readme",
   "dependencies": {
     "@types/es6-shim": "^0.31.32",
     "@types/node": "^7.0.8"
