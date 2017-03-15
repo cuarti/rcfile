@@ -1,6 +1,6 @@
 {
   "name": "@zenox/rcfile",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Read variables from rc files",
   "keywords": [
     "zenox",
@@ -10,7 +10,13 @@
   "license": "MIT",
   "main": "src/index.js",
   "typings": "src/index",
-  "scripts": {},
+  "scripts": {
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "dev": "gulp dev",
+    "test": "gulp build && mocha test",
+    "prepublish": "gulp build"
+  },
   "author": {
     "name": "Albert Cuartiella",
     "email": "cuarti1992@gmail.com"
@@ -29,8 +35,11 @@
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.4.1",
     "gulp-typescript": "^3.1.5",
+    "merge2": "^1.0.3",
     "mocha": "^3.2.0",
     "tslint": "^4.5.1",
     "typescript": "^2.2.1"
