@@ -1,6 +1,6 @@
 {
   "name": "@zenox/rcfile",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Read variables from rc files",
   "keywords": [
     "zenox",
