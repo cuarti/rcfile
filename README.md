@@ -9,11 +9,9 @@
 
 ## Description
 
-Rcfile is a NodeJS module of Zenox Framework to parse data from a file with sh format (key=value).
+NodeJS library builded in typescript to load data from file in bash format. It is part of Zenox Framework.
 
-It is builded in Typescript, but you could use it also with javascript.
-
-### File example
+#### File example
 
 ```bash
 # Comment
@@ -41,12 +39,12 @@ on load function.*
 
 Parse and load data from file.
 
-##### Typescript definition
+#### Typescript definition
 ```typescript
 declare function load<T extends Object>(path: string, encoding: string = 'utf8'): Promise<T>
 ```
 
-##### Example
+#### Example
 ```typescript
 import {load} from '@zenox/rcfile';
 
@@ -65,7 +63,7 @@ canonical path. It checks in order from:
 - Current working directory path.
 - Parents of current working directory path until file system root.
 
-##### Typescript definition
+#### Typescript definition
 ```typescript
 declare class RCFile {
     public constructor(path: string, encoding: string = 'utf8');
@@ -76,19 +74,19 @@ declare class RCFile {
 }
 ```
 
-##### RCFile#exists
+#### RCFile#exists
 Check if file exists.
 
-##### RCFile#load
+#### RCFile#load
 Parse and load data from file.
 
-##### RCFile.resolve
+#### RCFile.resolve
 Get existent RCFile object from canonical path
 
-##### RCFile.resolvePath
+#### RCFile.resolvePath
 Get existent path from canonical path
 
-##### Example
+#### Example
 ```typescript
 import {RCFile} from '@zenox/rcfile';
 

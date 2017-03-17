@@ -1,7 +1,7 @@
 {
   "name": "@zenox/rcfile",
   "version": "1.0.0",
-  "description": "Read variables from rc files",
+  "description": "NodeJS library builded in typescript to load data from file in bash format. It is part of Zenox Framework.",
   "keywords": [
     "zenox",
     "config",
