@@ -1,7 +1,7 @@
 
-import {RCFile} from './RCFile';
+import {load} from './load';
 
 export * from './RCFile';
 export * from './load';
 
-export default RCFile;
+export default load;

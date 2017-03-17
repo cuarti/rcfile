@@ -1,7 +1,7 @@
 
 import {ok, equal, deepEqual} from 'assert';
 import {join} from 'path';
-import RCFile from '..';
+import {RCFile} from '..';
 
 
 describe('RCFile', () => {

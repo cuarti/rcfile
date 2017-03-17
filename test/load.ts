@@ -1,7 +1,7 @@
 
 import {ok, deepEqual} from 'assert';
 import {join} from 'path';
-import {load} from '..';
+import load from '..';
 
 
 describe('load', () => {
