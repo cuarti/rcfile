@@ -14,7 +14,7 @@
     "build": "gulp build",
     "clean": "gulp clean",
     "dev": "gulp dev",
-    "test": "gulp build && mocha test",
+    "test": "gulp build && gulp test",
     "prepublish": "gulp build"
   },
   "author": {
@@ -37,10 +37,11 @@
     "@types/mocha": "^2.2.40",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-mocha": "^4.1.0",
     "gulp-sourcemaps": "^2.4.1",
+    "gulp-tslint": "^7.1.0",
     "gulp-typescript": "^3.1.5",
     "merge2": "^1.0.3",
-    "mocha": "^3.2.0",
     "tslint": "^4.5.1",
     "typescript": "^2.2.1"
   },

@@ -142,7 +142,7 @@ export class RCFile {
             let tokens = line.split('=').map(l => l.trim());
 
             if(tokens.length !== 2) {
-                //Here throws an error
+                // here throws an error
             }
 
             o[tokens[0]] = tokens[1];
