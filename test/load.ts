@@ -6,6 +6,8 @@ import load from '..';
 
 describe('load', () => {
 
+    process.chdir(__dirname);
+
     const EXPECTED_DATA = {
         NAME: 'rcfile',
         VERSION: '1',
@@ -31,7 +33,7 @@ describe('load', () => {
     });
 
     it('current working path', done => {
-        load('../../test/.examplerc').then(data => {
+        load('.examplerc').then(data => {
             deepEqual(data, EXPECTED_DATA);
             done();
         }).catch(done);

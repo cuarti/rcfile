@@ -6,8 +6,10 @@ import {RCFile} from '..';
 
 describe('RCFile', () => {
 
-    const EXISTENT_FILE_PATH = join(__dirname, '.examplerc');
-    const NONEXISTENT_FILE_PATH = join(__dirname, 'file');
+    process.chdir(__dirname);
+
+    const EXISTENT_FILE_PATH = '.examplerc';
+    const NONEXISTENT_FILE_PATH = 'file';
 
     let existent = new RCFile(EXISTENT_FILE_PATH);
     let nonexistent = new RCFile(NONEXISTENT_FILE_PATH);
@@ -58,15 +60,15 @@ describe('RCFile', () => {
     describe('.resolve()', () => {
 
         it('absolute path', done => {
-            RCFile.resolve(EXISTENT_FILE_PATH).then(file => {
-                equal(file.path, EXISTENT_FILE_PATH);
+            RCFile.resolve(join(__dirname, EXISTENT_FILE_PATH)).then(file => {
+                equal(file.path, join(__dirname, EXISTENT_FILE_PATH));
                 done();
             }).catch(done);
         });
 
         it('project root path', done => {
             RCFile.resolve('test/.examplerc').then(file => {
-                equal(file.path, EXISTENT_FILE_PATH);
+                equal(file.path, join(__dirname, EXISTENT_FILE_PATH));
                 done();
             }).catch(done);
         });
@@ -77,21 +79,21 @@ describe('RCFile', () => {
 
         it('absolute path', done => {
             RCFile.resolvePath(EXISTENT_FILE_PATH).then(path => {
-                equal(path, EXISTENT_FILE_PATH);
+                equal(path, join(__dirname, EXISTENT_FILE_PATH));
                 done();
             }).catch(done);
         });
 
         it('project root path', done => {
             RCFile.resolvePath('test/.examplerc').then(path => {
-                equal(path, EXISTENT_FILE_PATH);
+                equal(path, join(__dirname, EXISTENT_FILE_PATH));
                 done();
             }).catch(done);
         });
 
         it('current working path', done => {
-            RCFile.resolvePath('../../test/.examplerc').then(data => {
-                equal(data, EXISTENT_FILE_PATH);
+            RCFile.resolvePath('.examplerc').then(data => {
+                equal(data, join(__dirname, EXISTENT_FILE_PATH));
                 done();
             }).catch(done);
         });
