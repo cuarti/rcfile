@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "ban-types": false,
     "class-name": true,
     "comment-format": [
       true,
@@ -33,7 +34,6 @@
       true,
       "check-decl",
       "check-operator",
-      "check-module",
       "check-separator",
       "check-type",
       "check-typecast",
@@ -42,6 +42,9 @@
     "arrow-parens": [
       true,
       "ban-single-arg-parens"
-    ]
+    ],
+    "no-shadowed-variable": false,
+    "prefer-const": false,
+    "trailing-comma": false
   }
 }

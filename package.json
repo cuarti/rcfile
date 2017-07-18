@@ -11,11 +11,11 @@
   "main": "src/index.js",
   "typings": "src/index",
   "scripts": {
-    "build": "gulp build",
-    "clean": "gulp clean",
-    "dev": "gulp dev",
-    "test": "gulp build && gulp test",
-    "prepublish": "gulp build"
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "npm run lint && mocha",
+    "lint": "tslint **/*.ts -e '**/*.d.ts' -t verbose",
+    "prepublish": "npm run build"
   },
   "author": {
     "name": "Albert Cuartiella",
@@ -29,23 +29,12 @@
     "url": "https://github.com/cuarti/zenox-rcfile/issues"
   },
   "homepage": "https://github.com/cuarti/zenox-rcfile#readme",
-  "dependencies": {
-    "@types/es6-shim": "^0.31.32",
-    "@types/node": "^7.0.8"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/mocha": "^2.2.40",
-    "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-mocha": "^4.1.0",
-    "gulp-sourcemaps": "^2.4.1",
-    "gulp-tslint": "^7.1.0",
-    "gulp-typescript": "^3.1.5",
-    "merge2": "^1.0.3",
-    "tslint": "^4.5.1",
-    "typescript": "^2.2.1"
-  },
-  "optionalDependencies": {
-    "es6-shim": "^0.35.3"
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.14",
+    "mocha": "^3.4.2",
+    "tslint": "^5.5.0",
+    "typescript": "^2.4.1"
   }
 }
