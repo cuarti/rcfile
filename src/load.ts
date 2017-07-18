@@ -14,7 +14,7 @@ export function load<T extends Object>(path: string, encoding?: string): Promise
     return new Promise((resolve, reject) => {
 
         RCFile.resolve(path, encoding).then(file => {
-            file.load().then(data => resolve(data)).catch(reject);
+            file.load().then(data => resolve(data as T)).catch(reject);
 
         }).catch(reject);
     });
